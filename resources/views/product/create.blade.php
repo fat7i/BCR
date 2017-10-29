@@ -9,7 +9,7 @@
                 <div class="row">
                     <div class="col s4">
                         <div class="icon icon1">
-                            <i class="fa fa-heart"></i>
+                            <i class="fa fa-support"></i>
                         </div>
                     </div>
                     <div class="col s8">
@@ -92,8 +92,6 @@
                     <div id="files_list"></div>
                 </div>
 
-
-
                 <div class="input-field col s12">
                     <select name="location">
                         <option value="" disabled selected>Shop Name</option>
@@ -101,21 +99,17 @@
                             <option value="{{ $id }}">{{ $title }}</option>
                         @endforeach
                     </select>
-                    <label></label>
-                    <span class="help-block"><a href="{{ route('add_shop') }}">Other Shop</a></span>
                 </div>
 
                 <div class="input-field">
-
+                    <span class="right"><a href="{{ route('add_shop') }}">Other Shop</a></span>
+                    <br />
                 </div>
-
 
                 <div class="input-field">
                     <textarea cols="20" rows="2" id="description" class="materialize-textarea" name="description"></textarea>
                     <label for="description">Description</label>
                 </div>
-
-
 
                 <div class="row">
                     <label for="category">Category</label>

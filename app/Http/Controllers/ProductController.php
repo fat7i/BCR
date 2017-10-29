@@ -21,6 +21,11 @@ class ProductController extends Controller
 
     public function create($barcode = null)
     {
+        $product = Product::findByBarcode($barcode);
+
+        if ($product)
+            return redirect()->action('ProductController@show', ['id' => $barcode])->with('message', 'Product is Exist');
+
         //echo "create ". $barcode;
         $locations = Location::pluck('title', 'id');
         $categories = Category::pluck('title', 'id');
@@ -35,20 +40,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        /**
-   "barcode" => "123"
-  "user_id" => "1"
-  "title" => "ori bong"
-  "price" => "5.5"
-  "rate" => "on"
-  "photo" => null not used XXX
-  "photos" =>pppp,pppp,ppp,ppp
-         */
-
-
-
-
-
 
         $user_id = Auth::user()->id;
         Input::merge(['user_id' => $user_id]);
@@ -106,7 +97,7 @@ class ProductController extends Controller
         $product = Product::findByBarcode($id);
 
         if ($product)
-            return response()->json($product); //return view('property.show', ['property'=> $property]);
+            return view('product.show', ['product'=> $product]);
         else
             return redirect()->action('ProductController@create', ['id' => $id])
                 ->with('message', 'Product not Exist');

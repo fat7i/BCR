@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('t1/css/owl.transitions.css') }}">
     <link rel="stylesheet" href="{{ asset('t1/css/lightbox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('t1/css/style.css') }}">
-
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <!-- navbar -->
@@ -52,7 +52,7 @@
             @else
             <li>
                 <div class="photos">
-                    <img src="img/photos.png" alt="">
+                    <img src="{{ url('/') }}/t1/img/photos.png" alt="">
                     <h3>{{ Auth::user()->name }}</h3>
                 </div>
             </li>

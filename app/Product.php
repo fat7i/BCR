@@ -44,7 +44,12 @@ class Product extends Model
 
     public function location ()
     {
-        return $this->belongsToMany('App\Location');
+        return $this->belongsToMany('App\Location')->select(array('title', 'price'))->orderBy('price', 'asc');
+    }
+
+    public function comments ()
+    {
+        return $this->hasMany('App\Comment');
     }
 
     public static function findByBarcode ( $barcode )
