@@ -57,7 +57,7 @@
                 </div>
             </li>
             <li class="first-list">
-                <a href="index.html">Home</a>
+                <a href="{{ url('/') }}">Home</a>
             </li>
             <li>
                 <a href="{{ route('logout') }}"

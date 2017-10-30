@@ -122,15 +122,6 @@
 
                 </div>
 
-
-
-
-
-
-
-
-
-
                 <button class="button">Post</button>
             </form>
 

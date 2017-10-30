@@ -50,10 +50,10 @@ class ProductController extends Controller
         );
 
         if ($request->location)
-        $product->location()->attach($request->location, ['user_id' => $user_id, 'price' => $request->price ]);
+            $product->location()->attach($request->location, ['user_id' => $user_id, 'price' => $request->price]);
 
         if ($request->categories) {
-            foreach($request->categories as $category);
+            foreach ($request->categories as $category) ;
             $product->category()->attach($category, ['user_id' => $user_id]);
         }
 
@@ -71,8 +71,8 @@ class ProductController extends Controller
 
 
         return redirect()
-                ->action('ProductController@show', ['id' => $product->barcode])
-                ->with('message', 'Thanks a lot for your contribution!');
+            ->action('ProductController@show', ['id' => $product->barcode])
+            ->with('message', 'Thanks a lot for your contribution!');
     }
 
     public function upload(Request $request)
@@ -87,7 +87,7 @@ class ProductController extends Controller
 
         $file->move($destinationPath, $imagename);
 
-        $output['path'] = url("/").$photoPath."/".$imagename;
+        $output['path'] = url("/") . $photoPath . "/" . $imagename;
 
         return response()->json($output, 200);
     }
@@ -97,17 +97,36 @@ class ProductController extends Controller
         $product = Product::findByBarcode($id);
 
         if ($product)
-            return view('product.show', ['product'=> $product]);
+            return view('product.show', ['product' => $product]);
         else
-            return redirect()->action('ProductController@create', ['id' => $id])
-                ->with('message', 'Product not Exist');
-
-
-
+            return redirect()->action('ProductController@create', ['id' => $id]);
     }
 
     public function report($id)
     {
 
+    }
+
+    public function addPrice($id)
+    {
+        $product = Product::findByBarcode($id);
+        $locations = Location::pluck('title', 'id');
+        return view('product.add_price', ['product' => $product, 'locations' => $locations]);
+    }
+
+    public function postPrice (Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required',
+            'price' => 'required',
+        ]);
+
+        $product = Product::find($request->product_id);
+        $product->location()->attach($request->location, ['user_id' => Auth::user()->id, 'price' => $request->price]);
+
+        // TODO maintain price (update lowest price in product table)
+
+        return  redirect()->action('ProductController@show', ['id' => $product->barcode])
+            ->with('message', 'Thanks a lot for your contribution!');
     }
 }

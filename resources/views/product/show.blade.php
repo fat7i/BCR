@@ -58,7 +58,7 @@
                     </tr>
                     @endforeach
                     <tr>
-                        <td colspan="2"><strong class="right"><a href=""><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Shop</a></strong></td>
+                        <td colspan="2"><strong class="right"><a href="{{ action('ProductController@addPrice', ['id' => $product->barcode]) }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> Add Price</a></strong></td>
                     </tr>
                 </table>
                 <br />
