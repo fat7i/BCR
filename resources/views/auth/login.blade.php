@@ -12,8 +12,8 @@
                 {{ csrf_field() }}
 
                 <div class="input-field">
-                    <input id="title" type="text" class="validate" name="email"  value="{{ old('email') }}" autofocus>
-                    <label for="title">Phone Number or Email</label>
+                    <input id="email" type="text" class="validate" name="email"  value="{{ old('email') }}" autofocus>
+                    <label for="email">Phone Number or Email</label>
 
                     @if ($errors->has('email'))
                         <span class="help-block"><strong>{{ $errors->first('email') }}</strong></span>
@@ -21,8 +21,8 @@
                 </div>
 
                 <div class="input-field">
-                    <input id="title" type="password" class="validate" name="password"  value="{{ old('password') }}">
-                    <label for="title">Password</label>
+                    <input id="password" type="password" class="validate" name="password"  value="{{ old('password') }}">
+                    <label for="password">Password</label>
 
                     @if ($errors->has('password'))
                         <span class="help-block"><strong>{{ $errors->first('password') }}</strong></span>

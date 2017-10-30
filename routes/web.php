@@ -26,6 +26,12 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('upload', 'ProductController@upload');
 });
 
-
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/shop/add', 'LocationController@index')->name('add_shop');
+
+Route::group(['prefix' => 'shop'], function () {
+    Route::get('add', 'LocationController@create')->name('add_shop');
+    Route::post('add', 'LocationController@store');
+});
+
+Route::get('/contact', 'HomeController@contact')->name('contact');
+Route::post('/contact', 'HomeController@postContact');

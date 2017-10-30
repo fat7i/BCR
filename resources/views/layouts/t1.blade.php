@@ -37,7 +37,7 @@
             </div>
 
             <div class="panel-control-right">
-                <a href="contact.html"><i class="fa fa-envelope"></i></a>
+                <a href="{{ route('contact') }}"><i class="fa fa-envelope"></i></a>
             </div>
         </div>
     </div>
@@ -74,6 +74,27 @@
         </ul>
     </div>
     <!-- end panel control -->
+
+    @if (session('message'))
+        <div class="offers app-section app-pages">
+            <div class="container">
+                <div class="offers-content">
+                    <div class="row">
+                        <div class="col s4">
+                            <div class="icon icon1">
+                                <i class="fa fa-thumbs-up"></i>
+                            </div>
+                        </div>
+                        <div class="col s8">
+                            <div class="entry">
+                                <p>{{ session('message') }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
 
     @yield('content')
 

@@ -18,8 +18,8 @@ class CreateLocationsTable extends Migration
 
             $table->string('title', 1000);
 
-            $table->decimal('lat', 10, 7);
-            $table->decimal('lng', 10, 7);
+            $table->decimal('lat', 10, 7)->nullable();
+            $table->decimal('lng', 10, 7)->nullable();
 
             $table->timestamps();
         });
