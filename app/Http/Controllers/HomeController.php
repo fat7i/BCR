@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['contact', 'postContact']]);
     }
 
     /**
@@ -38,10 +38,11 @@ class HomeController extends Controller
         $request->validate([
             'name' => 'required',
             'message' => 'required',
+            'g-recaptcha-response' => 'required',
         ]);
 
         $data = [];
-        $data['email'] = $request->email;
+        $data['email'] = ($request->email)? $request->email : 'nobody@somewhere.com';
         $data['name'] = $request->name;
         $data['phone'] = $request->phone;
         $data['body_msg'] = $request->message;

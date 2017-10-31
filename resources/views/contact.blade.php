@@ -10,18 +10,18 @@
             <form method="POST" action="{{action('HomeController@contact')}}">
                 {{ csrf_field() }}
                 <div class="input-field">
-                    <input id="name" type="text" class="validate" name="name">
+                    <input id="name" type="text" class="validate" name="name" value="{{ Auth::user()['name'] }}">
                     <label for="name">Name</label>
                     @if ($errors->has('name'))
                         <span class="help-block"><strong>{{ $errors->first('name') }}</strong></span>
                     @endif
                 </div>
                 <div class="input-field">
-                    <input id="email" type="email" class="validate" name="email">
+                    <input id="email" type="email" class="validate" name="email" value="{{ Auth::user()['email'] }}">
                     <label for="email">Email</label>
                 </div>
                 <div class="input-field">
-                    <input id="phone" type="text" class="validate" name="phone">
+                    <input id="phone" type="text" class="validate" name="phone" value="{{ Auth::user()['phone'] }}">
                     <label for="phone">Number</label>
                 </div>
                 <div class="input-field">
@@ -34,6 +34,9 @@
 
                 <div class="input-field">
                     {!! app('captcha')->display() !!}
+                    @if ($errors->has('g-recaptcha-response'))
+                        <span class="help-block"><strong>{{ $errors->first('g-recaptcha-response') }}</strong></span>
+                    @endif
                 </div>
 
                 <button class="button">Submit</button>
