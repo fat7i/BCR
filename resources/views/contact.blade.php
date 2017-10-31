@@ -22,7 +22,7 @@
                 </div>
                 <div class="input-field">
                     <input id="phone" type="text" class="validate" name="phone" value="{{ Auth::user()['phone'] }}">
-                    <label for="phone">Number</label>
+                    <label for="phone">Phone Number</label>
                 </div>
                 <div class="input-field">
                     <textarea cols="20" rows="10" id="your-message" class="validate" name="message"></textarea>

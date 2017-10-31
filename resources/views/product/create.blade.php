@@ -32,7 +32,7 @@
                 <h3>Add Product</h3>
             </div>
 
-            <form method="POST" action="{{action('ProductController@store')}}">
+            <form method="POST" action="{{action('ProductController@postComment')}}">
                 {{ csrf_field() }}
                 <input type="hidden" class="validate" name="barcode" value="{{ $barcode }}">
                 <input type="hidden" class="validate" name="id" value="{{ old('id') }}" />

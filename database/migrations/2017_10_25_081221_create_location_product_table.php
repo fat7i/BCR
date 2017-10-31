@@ -25,7 +25,7 @@ class CreateLocationProductTable extends Migration
             $table->integer('location_id')->unsigned();
             $table->foreign('location_id')->references('id')->on('locations');
 
-            $table->decimal('price', 5, 2);
+            $table->decimal('price', 8, 2)->unsigned();
 
             $table->timestamps();
         });

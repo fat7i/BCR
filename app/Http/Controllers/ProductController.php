@@ -7,6 +7,7 @@ use App\Category;
 use App\Location;
 use App\Product;
 use App\Photo;
+use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
@@ -78,15 +79,10 @@ class ProductController extends Controller
     public function upload(Request $request)
     {
         $file = $request->file('photo');
-
         $imagename = time() . "_1_" . date('Y-m-d') . '.' . $file->getClientOriginalExtension();
-
         $photoPath = '/uploads/' . date('Y/m/d/') . "/" . date('Y-m-d');
-
         $destinationPath = public_path($photoPath);
-
         $file->move($destinationPath, $imagename);
-
         $output['path'] = url("/") . $photoPath . "/" . $imagename;
 
         return response()->json($output, 200);
@@ -118,13 +114,38 @@ class ProductController extends Controller
     {
         $request->validate([
             'product_id' => 'required',
+            'location' => 'required',
             'price' => 'required',
         ]);
 
         $product = Product::find($request->product_id);
         $product->location()->attach($request->location, ['user_id' => Auth::user()->id, 'price' => $request->price]);
 
-        // TODO maintain price (update lowest price in product table)
+        $min_price = $product->location()->orderBy('price', 'asc')->pluck('price')->first();
+        $product->price = $min_price;
+        $product->save();
+
+        return  redirect()->action('ProductController@show', ['id' => $product->barcode])
+            ->with('message', 'Thanks a lot for your contribution!');
+    }
+
+    public function postComment (Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required',
+            'rate' => 'required',
+        ]);
+
+        $product = Product::find($request->product_id);
+
+        $comment = new Comment;
+        $comment->user_id = Auth::user()->id;
+        $comment->rate = $request->rate;
+        $comment->message = $request->message;
+
+
+        $product->comments()->save($comment);
+        $product->save();
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
             ->with('message', 'Thanks a lot for your contribution!');

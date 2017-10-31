@@ -22,7 +22,7 @@ class CreateCommentsTable extends Migration
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
 
-            $table->text('message');
+            $table->text('message')->nullable();
 
             $table->timestamps();
         });

@@ -5,7 +5,8 @@
     <div class="register app-section app-pages">
         <div class="container">
             <div class="pages-title">
-                <h3>Add Price to <i class="fa fa-arrow-right"></i> {{ $product->title }}</h3>
+                <div class="chip left"><a href="{{ URL::previous() }}">< Back</a></div>
+                <h3>Add Price for <br /> <u>{{ $product->title }}</u></h3>
             </div>
 
             <form method="POST" action="{{action('ProductController@postPrice')}}">
@@ -28,6 +29,9 @@
                             <option value="{{ $id }}">{{ $title }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('location'))
+                        <span class="help-block"><strong>{{ $errors->first('location') }}</strong></span>
+                    @endif
                 </div>
 
                 <button class="button">Post</button>

@@ -70,44 +70,38 @@
 
 
                 <div class="comment">
-                    <h6>2 Comment</h6>
+                    <h6>{{ count($product->comments)  }} Comment</h6>
                     @foreach($product->comments as $c)
                     <div class="content">
                         <img src="{{ url('/') }}/t1/img/comment1.png" alt="">
                         <div class="entry">
                             <strong><a href="">{{ $c->user->name }}</a></strong>
-                            <p>{{ $c->message }}</p>
+                            - <a href="#">{{ $c->rate }} <i class="fa fa-star"></i></a>
+                            <p>{{ $c->message }}&nbsp;</p>
                         </div>
                     </div>
                     @endforeach
                 </div>
+                <br />
+
+                @if (Auth::check())
                 <div class="post-comment">
                     <h6>Leave a Reply</h6>
                     <div class="content">
-                        <form action="#">
-                            <div class="input-field">
-                                <input id="name" type="text" class="validate">
-                                <label for="name">Name</label>
-                            </div>
-                            <div class="input-field">
-                                <input id="email" type="email" class="validate">
-                                <label for="email">Email</label>
-                            </div>
-                            <div class="input-field">
-                                <input id="phone" type="text" class="validate">
-                                <label for="phone">Phone</label>
-                            </div>
+                        <form method="POST" action="{{action('ProductController@postComment')}}">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                             <div class="row">
                                 <label>Star Rating</label>
                                 <p>
-                                    <input class="with-gap" name="rate" type="radio" id="s1" value="1" checked />
+                                    <input class="with-gap" name="rate" type="radio" id="s1" value="1" />
                                     <label for="s1">1</label>
 
                                     <input class="with-gap" name="rate" type="radio" id="s2" value="2" />
                                     <label for="s2">2</label>
 
-                                    <input class="with-gap" name="rate" type="radio" id="s3" value="3" />
+                                    <input class="with-gap" name="rate" type="radio" id="s3" value="3" checked />
                                     <label for="s3">3</label>
 
                                     <input class="with-gap" name="rate" type="radio" id="s4" value="4" />
@@ -123,16 +117,25 @@
                             </div>
 
                             <div class="input-field">
-                                <textarea cols="20" rows="10" id="comment" class="validate"></textarea>
+                                <textarea cols="20" rows="5" id="comment" class="validate" name="message"></textarea>
                                 <label for="comment">Comments</label>
                             </div>
                             <button class="button">Post Comment</button>
-                            <a href="#" class="right"><i class="fa fa-exclamation-circle"></i> Something Wrong?!</a> <!-- TODO -->
                         </form>
-                        <br />
                     </div>
                 </div>
 
+                @else
+                    <div class="note app-section">
+                        <div class="container">
+                            <h5><a href="{{ route('register') }}" style="color: #fff">Leave a Reply ?</a></h5>
+                            <p><a href="{{ route('register') }}" style="color: #fff; font-weight: bold;">Signup</a> to share your experience with the others</p>
+                        </div>
+                    </div>
+                @endif
+
+                <a href="{{ route('contact') }}" class="right"><i class="fa fa-exclamation-circle"></i> Something Wrong?!</a>
+                <br />
 
             </div>
         </div>
