@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -38,7 +39,18 @@ class HomeController extends Controller
             'name' => 'required',
             'message' => 'required',
         ]);
-        dd($request->all());
-        // TODO send mail + mailgun
+
+        $data = [];
+        $data['email'] = $request->email;
+        $data['name'] = $request->name;
+        $data['phone'] = $request->phone;
+        $data['message'] = $request->message;
+
+        Mail::send('emails.contact_form', $data, function ($message) use ($data) {
+            $message->to('fat7i.wp@gmail.com', 'Mohamed Fathi');
+            $message->from($data['email'], $data['name']);
+            $message->subject('Contact Form');
+        });
+
     }
 }

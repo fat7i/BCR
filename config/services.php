@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => env('mail.barcode.qa'),
+        'secret' => env('key-d0910f370fbbfe6a8e65272ff5e28879'),
     ],
 
     'ses' => [
