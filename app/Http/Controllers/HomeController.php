@@ -44,7 +44,7 @@ class HomeController extends Controller
         $data['email'] = $request->email;
         $data['name'] = $request->name;
         $data['phone'] = $request->phone;
-        $data['message'] = $request->message;
+        $data['body_msg'] = $request->message;
 
         Mail::send('emails.contact_form', $data, function ($message) use ($data) {
             $message->to('fat7i.wp@gmail.com', 'Mohamed Fathi');
@@ -52,5 +52,6 @@ class HomeController extends Controller
             $message->subject('Contact Form');
         });
 
+        return  back()->with('message', 'Thanks a lot, We\'ll contact you soon!');
     }
 }
