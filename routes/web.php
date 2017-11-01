@@ -27,6 +27,8 @@ Route::group(['prefix' => 'product'], function () {
     Route::get('{id}/add/price', 'ProductController@addPrice');
     Route::post('add/price', 'ProductController@postPrice');
     Route::post('add/comment', 'ProductController@postComment');
+    Route::get('{id}/add/photo', 'ProductController@addPhoto');
+    Route::post('add/photo', 'ProductController@postPhoto');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

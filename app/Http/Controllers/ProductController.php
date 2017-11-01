@@ -79,8 +79,8 @@ class ProductController extends Controller
     public function upload(Request $request)
     {
         $file = $request->file('photo');
-        $imagename = time() . "_1_" . date('Y-m-d') . '.' . $file->getClientOriginalExtension();
-        $photoPath = '/uploads/' . date('Y/m/d/') . "/" . date('Y-m-d');
+        $imagename = uniqid(Auth::user()->id . "_", false) . '.' . $file->getClientOriginalExtension();
+        $photoPath = '/uploads/' . date('Y/m/d/Y-m-d_H-i-s');
         $destinationPath = public_path($photoPath);
         $file->move($destinationPath, $imagename);
         $output['path'] = url("/") . $photoPath . "/" . $imagename;
@@ -146,6 +146,36 @@ class ProductController extends Controller
 
         $product->comments()->save($comment);
         $product->save();
+
+        return  redirect()->action('ProductController@show', ['id' => $product->barcode])
+            ->with('message', 'Thanks a lot for your contribution!');
+    }
+
+    public function addPhoto ($id)
+    {
+        $product = Product::findByBarcode($id);
+        return view('product.add_photo', ['product' => $product]);
+    }
+
+    public  function postPhoto (Request $request)
+    {
+
+        $request->validate([
+            'product_id' => 'required',
+        ]);
+
+        $product = Product::find($request->product_id);
+        if ($request->photos) {
+            $photos = [];
+            foreach (explode(',', $request->photos) as $path) {
+                $photo = new Photo;
+                $photo->user_id = Auth::user()->id;
+                $photo->path = $path;
+
+                $photos[] = $photo;
+            }
+            $product->photos()->saveMany($photos);
+        }
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
             ->with('message', 'Thanks a lot for your contribution!');

@@ -20,7 +20,9 @@
             <div class="overlay"></div>
             <div class="caption">
                 <div class="container">
+                    <a href="{{ action('ProductController@addPhoto', ['id' => $product->barcode]) }}">
                     <button class="button">Add Photos</button> <!-- TODO add photos to product -->
+                    </a>
                 </div>
             </div>
         </div>

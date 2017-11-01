@@ -5,7 +5,7 @@
     <div class="register app-section app-pages">
         <div class="container">
             <div class="pages-title">
-                <div class="chip left"><a href="{{ URL::previous() }}">< Back</a></div>
+                <div class="chip left"><a href="{{ action('ProductController@show', ['id' => $product->barcode]) }}">< Back</a></div>
                 <h3>Add Price for <br /> <u>{{ $product->title }}</u></h3>
             </div>
 
