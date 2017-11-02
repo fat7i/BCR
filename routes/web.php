@@ -40,3 +40,8 @@ Route::group(['prefix' => 'shop'], function () {
 
 Route::get('/contact', 'HomeController@contact')->name('contact');
 Route::post('/contact', 'HomeController@postContact');
+
+Route::group(['prefix' => 'category'], function () {
+    Route::get('/', 'CategoryController@index');
+    Route::get('{id}', 'CategoryController@show');
+});
