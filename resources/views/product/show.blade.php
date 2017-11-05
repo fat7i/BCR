@@ -21,7 +21,7 @@
             <div class="caption">
                 <div class="container">
                     <a href="{{ action('ProductController@addPhoto', ['id' => $product->barcode]) }}">
-                    <button class="button">Add Photos</button> <!-- TODO add photos to product -->
+                    <button class="button">Add Photos</button>
                     </a>
                 </div>
             </div>
@@ -34,9 +34,9 @@
             <div class="entry">
             <div class="user-date">
                 <ul>
-                    <li><a href="#"><i class="fa fa-user"></i> {{ $product->user->name }}</a></li>
-                    <li><a href="#"><i class="fa fa-star"></i> {{ $product->rate }}</a></li>
-                    <li><a href="#"><i class="fa fa-money"></i> QR {{ $product->price }}</a></li>
+                    <li><a href=""><i class="fa fa-user"></i> {{ $product->user->name }}</a></li>
+                    <li><a href=""><i class="fa fa-star"></i> <b>{{ $product->rate }}</b></a>/ {{ count($product->comments)+1 }}</li>
+                    <li><a href=""><i class="fa fa-money"></i> QR {{ $product->price }}</a></li>
                 </ul>
             </div>
             <h5>{{ $product->title }}</h5>
@@ -44,7 +44,7 @@
 
                 <div class="share">
                     <ul>
-                        <li><h6>Share via :</h6></li> <!-- TODO socail share -->
+                        <li><h6>Share via :</h6></li> <!-- TODO socail share {{ URL::current() }} -->
                         <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
                         <li><a href=""><i class="fa fa-twitter-square"></i></a></li>
                         <li><a href=""><i class="fa fa-google-plus-square"></i></a></li>
@@ -75,10 +75,10 @@
                     <h6>{{ count($product->comments)  }} Comment</h6>
                     @foreach($product->comments as $c)
                     <div class="content">
-                        <img src="{{ url('/') }}/t1/img/comment1.png" alt="">
+                        <img src="https://api.adorable.io/avatars/130/{{ rand (500, 1000)  }}.png" alt="{{ $c->user->name }}">
                         <div class="entry">
                             <strong><a href="">{{ $c->user->name }}</a></strong>
-                            - <a href="#">{{ $c->rate }} <i class="fa fa-star"></i></a>
+                            - <a href="">{{ $c->rate }} <i class="fa fa-star"></i></a>
                             <p>{{ $c->message }}&nbsp;</p>
                         </div>
                     </div>

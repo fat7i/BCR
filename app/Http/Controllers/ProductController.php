@@ -25,9 +25,8 @@ class ProductController extends Controller
         $product = Product::findByBarcode($barcode);
 
         if ($product)
-            return redirect()->action('ProductController@show', ['id' => $barcode])->with('message', 'Product is Exist');
+            return redirect()->action('ProductController@show', ['id' => $barcode])->with('toast', 'Product is Exist');
 
-        //echo "create ". $barcode;
         $locations = Location::pluck('title', 'id');
         $categories = Category::pluck('title', 'id');
         return view('product.create',
@@ -41,7 +40,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-
         $user_id = Auth::user()->id;
         Input::merge(['user_id' => $user_id]);
 
@@ -54,7 +52,7 @@ class ProductController extends Controller
             $product->location()->attach($request->location, ['user_id' => $user_id, 'price' => $request->price]);
 
         if ($request->categories) {
-            foreach ($request->categories as $category) ;
+            foreach ($request->categories as $category)
             $product->category()->attach($category, ['user_id' => $user_id]);
         }
 
@@ -73,7 +71,7 @@ class ProductController extends Controller
 
         return redirect()
             ->action('ProductController@show', ['id' => $product->barcode])
-            ->with('message', 'Thanks a lot for your contribution!');
+            ->with('toast', 'Thanks a lot for your contribution!');
     }
 
     public function upload(Request $request)
@@ -121,12 +119,13 @@ class ProductController extends Controller
         $product = Product::find($request->product_id);
         $product->location()->attach($request->location, ['user_id' => Auth::user()->id, 'price' => $request->price]);
 
+        //-- maintain the price
         $min_price = $product->location()->orderBy('price', 'asc')->pluck('price')->first();
         $product->price = $min_price;
         $product->save();
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
-            ->with('message', 'Thanks a lot for your contribution!');
+            ->with('toast', 'Thanks a lot for your contribution!');
     }
 
     public function postComment (Request $request)
@@ -143,12 +142,15 @@ class ProductController extends Controller
         $comment->rate = $request->rate;
         $comment->message = $request->message;
 
-
         $product->comments()->save($comment);
+
+        //-- maintain the star rating
+        $product->rate = ceil( $product->comments()->avg('rate') );
+
         $product->save();
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
-            ->with('message', 'Thanks a lot for your contribution!');
+            ->with('toast', 'Thanks a lot for your contribution!');
     }
 
     public function addPhoto ($id)
@@ -178,6 +180,6 @@ class ProductController extends Controller
         }
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
-            ->with('message', 'Thanks a lot for your contribution!');
+            ->with('toast', 'Thanks a lot for your contribution!');
     }
 }

@@ -74,7 +74,7 @@
         </ul>
     </div>
     <!-- end panel control -->
-
+    {{--
     @if (session('message'))
         <div class="offers app-section app-pages">
             <div class="container">
@@ -94,7 +94,9 @@
                 </div>
             </div>
         </div>
+
     @endif
+    --}}
 
     @yield('content')
 
@@ -114,6 +116,14 @@
 --}}
 
     @yield('js')
+
+    @if (session('toast'))
+    <script>
+        $(function () {
+            Materialize.toast("{{ session('toast') }}", 4000);
+        });
+    </script>
+    @endif
 
 </body>
 </html>
