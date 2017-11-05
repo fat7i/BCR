@@ -57,21 +57,16 @@
 
                 <div class="row">
                     <label>Star Rating</label>
-                    <p>
-                        <input class="with-gap" name="rate" type="radio" id="s1" value="1" checked />
-                        <label for="s1">1</label>
+                    <p class="star-rating">
+                        <input class="with-gap" name="rate" type="radio" id="s1" value="1" />
 
                         <input class="with-gap" name="rate" type="radio" id="s2" value="2" />
-                        <label for="s2">2</label>
 
-                        <input class="with-gap" name="rate" type="radio" id="s3" value="3" />
-                        <label for="s3">3</label>
+                        <input class="with-gap" name="rate" type="radio" id="s3" value="3" checked />
 
                         <input class="with-gap" name="rate" type="radio" id="s4" value="4" />
-                        <label for="s4">4</label>
 
                         <input class="with-gap" name="rate" type="radio" id="s5" value="5" />
-                        <label for="s5">5 Stars</label>
                     </p>
 
                     @if ($errors->has('rate'))
@@ -90,6 +85,9 @@
                         <input class="file-path validate" type="text" placeholder="Upload one or more photos" id="loading">
                     </div>
                     <div id="files_list"></div>
+                    @if ($errors->has('photos'))
+                        <span class="help-block"><strong>{{ $errors->first('photos') }}</strong></span>
+                    @endif
                 </div>
 
                 <div class="input-field col s12">
@@ -99,6 +97,9 @@
                             <option value="{{ $id }}">{{ $title }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('location'))
+                        <span class="help-block"><strong>{{ $errors->first('location') }}</strong></span>
+                    @endif
                 </div>
 
                 <div class="input-field">
@@ -119,7 +120,9 @@
                         <label for="{{ $id }}">{{ $title }}</label>
                     </p>
                     @endforeach
-
+                    @if ($errors->has('categories'))
+                        <span class="help-block"><strong>{{ $errors->first('categories') }}</strong></span>
+                    @endif
                 </div>
 
                 <button class="button">Post</button>
@@ -135,6 +138,10 @@
     <script src="{{ asset('t1/js/blueimp/vendor/jquery.ui.widget.js') }}"></script>
     <script src="{{ asset('t1/js/blueimp/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('t1/js/blueimp/jquery.fileupload.js') }}"></script>
+
+    <script src="{{ asset('t1/star-rating/rating.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('t1/star-rating/rating.css') }}">
+
     <script>
         $(function () {
             $('select').material_select();
@@ -157,6 +164,8 @@
                     $('#loading').val('');
                 }
             });
+
+            $('.star-rating').rating();
         });
     </script>
     <style>

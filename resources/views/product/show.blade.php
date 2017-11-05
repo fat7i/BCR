@@ -34,9 +34,9 @@
             <div class="entry">
             <div class="user-date">
                 <ul>
-                    <li><a href=""><i class="fa fa-user"></i> {{ $product->user->name }}</a></li>
-                    <li><a href=""><i class="fa fa-star"></i> <b>{{ $product->rate }}</b></a>/ {{ count($product->comments)+1 }}</li>
-                    <li><a href=""><i class="fa fa-money"></i> QR {{ $product->price }}</a></li>
+                    <li><a><i class="fa fa-user"></i> {{ $product->user->name }}</a></li>
+                    <li><a><i class="star fullStar"></i> <b>{{ $product->rate }}</b></a></li>
+                    <li><a><i class="fa fa-money"></i> QR {{ $product->price }}</a></li>
                 </ul>
             </div>
             <h5>{{ $product->title }}</h5>
@@ -45,10 +45,10 @@
                 <div class="share">
                     <ul>
                         <li><h6>Share via :</h6></li> <!-- TODO socail share {{ URL::current() }} -->
-                        <li><a href=""><i class="fa fa-facebook-square"></i></a></li>
-                        <li><a href=""><i class="fa fa-twitter-square"></i></a></li>
-                        <li><a href=""><i class="fa fa-google-plus-square"></i></a></li>
-                        <li><a href=""><i class="fa fa-instagram"></i></a></li>
+                        <li><a><i class="fa fa-facebook-square"></i></a></li>
+                        <li><a><i class="fa fa-twitter-square"></i></a></li>
+                        <li><a><i class="fa fa-google-plus-square"></i></a></li>
+                        <li><a><i class="fa fa-instagram"></i></a></li>
                     </ul>
                 </div>
 
@@ -77,9 +77,17 @@
                     <div class="content">
                         <img src="https://api.adorable.io/avatars/130/{{ rand (500, 1000)  }}.png" alt="{{ $c->user->name }}">
                         <div class="entry">
-                            <strong><a href="">{{ $c->user->name }}</a></strong>
-                            - <a href="">{{ $c->rate }} <i class="fa fa-star"></i></a>
-                            <p>{{ $c->message }}&nbsp;</p>
+                            <a>{{ $c->user->name }}</a>
+                            <div class="stars right">
+                                @for ($i = 0; $i < $c->rate; $i++)
+                                    <a class="star fullStar"></a>
+                                @endfor
+                            </div>
+
+                            <p>{!!html_entity_decode($c->message)!!}&nbsp;
+                                <br />
+                                <small style="color: #e0e0e0;">{{ date('j M Y G:i', strtotime($c->created_at)) }}</small>
+                            </p>
                         </div>
                     </div>
                     @endforeach
@@ -88,29 +96,19 @@
 
                 @if (Auth::check())
                 <div class="post-comment">
-                    <h6>Leave a Reply</h6>
+                    <h6>Rate This ...</h6>
                     <div class="content">
                         <form method="POST" action="{{action('ProductController@postComment')}}">
                             {{ csrf_field() }}
                             <input type="hidden" name="product_id" value="{{ $product->id }}">
 
                             <div class="row">
-                                <label>Star Rating</label>
-                                <p>
+                                <p class="star-rating">
                                     <input class="with-gap" name="rate" type="radio" id="s1" value="1" />
-                                    <label for="s1">1</label>
-
                                     <input class="with-gap" name="rate" type="radio" id="s2" value="2" />
-                                    <label for="s2">2</label>
-
                                     <input class="with-gap" name="rate" type="radio" id="s3" value="3" checked />
-                                    <label for="s3">3</label>
-
                                     <input class="with-gap" name="rate" type="radio" id="s4" value="4" />
-                                    <label for="s4">4</label>
-
                                     <input class="with-gap" name="rate" type="radio" id="s5" value="5" />
-                                    <label for="s5">5 Stars</label>
                                 </p>
 
                                 @if ($errors->has('rate'))
@@ -146,5 +144,12 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('t1/star-rating/rating.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('t1/star-rating/rating.css') }}">
 
+    <script>
+        $(function () {
+            $('.star-rating').rating();
+        });
+    </script>
 @endsection

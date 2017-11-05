@@ -40,6 +40,15 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required|numeric',
+            'rate' => 'required|numeric',
+            'photos' => 'required',
+            'location' => 'required',
+            'categories' => 'required',
+        ]);
+
         $user_id = Auth::user()->id;
         Input::merge(['user_id' => $user_id]);
 
@@ -67,6 +76,15 @@ class ProductController extends Controller
             }
             $product->photos()->saveMany($photos);
         }
+
+
+
+        $comment = new Comment;
+        $comment->user_id = Auth::user()->id;
+        $comment->rate = $request->rate;
+        $comment->message = "<blockquote>Product posted by me</blockquote>";
+
+        $product->comments()->save($comment);
 
 
         return redirect()
