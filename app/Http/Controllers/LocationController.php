@@ -26,4 +26,10 @@ class LocationController extends Controller
 
         return back()->with('message', 'Thanks a lot for your contribution!');
     }
+
+    public function show ($id)
+    {
+        $location = Location::findOrfail($id);
+        return view('location.show', ['location' => $location]);
+    }
 }

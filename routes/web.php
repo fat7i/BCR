@@ -36,6 +36,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'shop'], function () {
     Route::get('add', 'LocationController@create')->name('add_shop');
     Route::post('add', 'LocationController@store');
+    Route::get('{id}', 'LocationController@show');
 });
 
 Route::get('/contact', 'HomeController@contact')->name('contact');

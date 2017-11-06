@@ -16,10 +16,7 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-        //echo "id=>>". $id;
         $category = Category::with('products')->where('id', $id)->first();
-
-        //return response()->json($category);
         return view('category.show', ['category' => $category]);
     }
 }

@@ -55,7 +55,7 @@
                 <table class="bordered striped">
                     @foreach($product->location as $l)
                     <tr>
-                        <td>{{ $l->title }}</td>
+                        <td><a href="{{ action('LocationController@show', ['id' => $l->location_id]) }}">{{ $l->title }}</td>
                         <td>QR {{ $l->price }}</td>
                     </tr>
                     @endforeach
