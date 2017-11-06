@@ -66,7 +66,7 @@
                 <br />
 
                 @foreach($product->category as $c)
-                    <div class="chip">{{ $c->title  }}</div>
+                    <div class="chip"><a href="{{ action('CategoryController@show', ['id' => $c->id]) }}">{{ $c->title  }}</a></div>
                 @endforeach
 
 
@@ -128,8 +128,12 @@
                 @else
                     <div class="note app-section">
                         <div class="container">
-                            <h5><a href="{{ route('register') }}" style="color: #fff">Leave a Reply ?</a></h5>
-                            <p><a href="{{ route('register') }}" style="color: #fff; font-weight: bold;">Signup</a> to share your experience with the others</p>
+                            <h5><a href="{{ route('register') }}" style="color: #fff">Rate this ?</a></h5>
+                            <p>
+                                <a  class="waves-effect waves-light btn red darken-4" href="{{ route('register') }}">Login</a> OR
+                                <a  class="waves-effect waves-light btn red darken-4" href="{{ route('register') }}">Signup</a>
+                                <br />to share your experience with the others.
+                            </p>
                         </div>
                     </div>
                 @endif

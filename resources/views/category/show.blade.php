@@ -2,39 +2,29 @@
 
 @section('content')
     <div class="app-section app-pages">
+        <h2 class="container">{{ $category->title  }}</h2>
         <ul class="collection">
+            @foreach($category->products as $p)
             <li class="collection-item avatar">
-                <img src="images/yuna.jpg" alt="" class="circle">
-                <span class="title">Title</span>
-                <p>First Line <br>
-                    Second Line
+                <i class="material-icons circle red">brightness_1</i>
+                <span class="title">
+                    <a href="{{ action('ProductController@show', ['id' => $p->barcode]) }}">
+                        {{ $p->title  }}
+                    </a>
+                </span>
+                <p>
+                    QR {{ $p->price  }}
+                    <br />
+                    @for ($i = 0; $i < $p->rate; $i++)
+                        <a class="star fullStar" href="{{ action('ProductController@show', ['id' => $p->barcode]) }}"></a>
+                    @endfor
                 </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
             </li>
-            <li class="collection-item avatar">
-                <i class="material-icons circle">folder</i>
-                <span class="title">Title</span>
-                <p>First Line <br>
-                    Second Line
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-            <li class="collection-item avatar">
-                <i class="material-icons circle green">insert_chart</i>
-                <span class="title">Title</span>
-                <p>First Line <br>
-                    Second Line
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
-            <li class="collection-item avatar">
-                <i class="material-icons circle red">play_arrow</i>
-                <span class="title">Title</span>
-                <p>First Line <br>
-                    Second Line
-                </p>
-                <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-            </li>
+            @endforeach
         </ul>
     </div>
+@endsection
+
+@section('js')
+    <link rel="stylesheet" href="{{ asset('t1/star-rating/rating.css') }}">
 @endsection
