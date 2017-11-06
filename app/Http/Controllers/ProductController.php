@@ -22,6 +22,9 @@ class ProductController extends Controller
 
     public function create($barcode = null)
     {
+        if (!$barcode)
+            abort(404);
+
         $product = Product::findByBarcode($barcode);
 
         if ($product)

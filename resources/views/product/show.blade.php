@@ -128,9 +128,9 @@
                 @else
                     <div class="note app-section">
                         <div class="container">
-                            <h5><a href="{{ route('register') }}" style="color: #fff">Rate this ?</a></h5>
+                            <h5><a href="{{ route('login') }}" style="color: #fff">Rate this ?</a></h5>
                             <p>
-                                <a  class="waves-effect waves-light btn red darken-4" href="{{ route('register') }}">Login</a> OR
+                                <a  class="waves-effect waves-light btn red darken-4" href="{{ route('login') }}">Login</a> OR
                                 <a  class="waves-effect waves-light btn red darken-4" href="{{ route('register') }}">Signup</a>
                                 <br />to share your experience with the others.
                             </p>

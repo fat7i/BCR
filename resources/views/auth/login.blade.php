@@ -31,7 +31,7 @@
 
                 <div><a href="{{ route('password.request') }}" class="forgot">Forgot Password?</a></div>
                 <div class="chebox">
-                    <input type="checkbox" id="checkbox" />
+                    <input type="checkbox" id="checkbox" name="remember" checked />
                     <label for="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>Remember me</label>
                 </div>
                 <button class="button">Login</button>
