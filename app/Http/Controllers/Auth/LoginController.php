@@ -47,10 +47,10 @@ class LoginController extends Controller
 
         if (Auth()->attempt($request->only($field, 'password')))
         {
-            return redirect('/home');
+            return redirect()->route('home');
         }
 
-        return redirect('/login')->withErrors([
+        return redirect()->route('login')->withErrors([
             'error' => 'These credentials do not match our records.',
         ]);
     }

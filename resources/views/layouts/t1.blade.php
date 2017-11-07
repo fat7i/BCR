@@ -52,17 +52,15 @@
             @else
             <li>
                 <div class="photos">
-                    <img src="{{ url('/') }}/t1/img/photos.png" alt="">
+                    <img src="https://api.adorable.io/avatars/130/{{ rand (500, 1000)  }}.png" alt="">
                     <h3>{{ Auth::user()->name }}</h3>
                 </div>
             </li>
             <li class="first-list">
-                <a href="{{ url('/') }}">Home</a>
+                <a href="{{ route('home') }}">Dashboard</a>
             </li>
             <li>
-                <a href="{{ route('logout') }}"
-                   onclick="event.preventDefault();
-                                             document.getElementById('logout-form').submit();">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Logout
                 </a>
 
@@ -74,7 +72,6 @@
         </ul>
     </div>
     <!-- end panel control -->
-    {{--
     @if (session('message'))
         <div class="offers app-section app-pages">
             <div class="container">
@@ -94,9 +91,16 @@
                 </div>
             </div>
         </div>
-
     @endif
-    --}}
+
+    <!-- end panel control -->
+    @if ($errors->all())
+        <div class="offers app-section app-pages container">
+            @foreach ($errors->all() as $error)
+                <blockquote>{{ $error }}</blockquote>
+            @endforeach
+        </div>
+    @endif
 
     @yield('content')
 
