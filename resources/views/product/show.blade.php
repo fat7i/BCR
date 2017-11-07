@@ -43,13 +43,8 @@
             <p>{{ $product->description }}</p>
 
                 <div class="share">
-                    <ul>
-                        <li><h6>Share via :</h6></li> <!-- TODO socail share {{ URL::current() }} -->
-                        <li><a><i class="fa fa-facebook-square"></i></a></li>
-                        <li><a><i class="fa fa-twitter-square"></i></a></li>
-                        <li><a><i class="fa fa-google-plus-square"></i></a></li>
-                        <li><a><i class="fa fa-instagram"></i></a></li>
-                    </ul>
+                    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f2f310153a68b98"></script>
+                    <div class="addthis_inline_share_toolbox"></div>
                 </div>
 
                 <table class="bordered striped">
