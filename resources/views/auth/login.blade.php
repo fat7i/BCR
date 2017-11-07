@@ -12,7 +12,7 @@
                 {{ csrf_field() }}
 
                 <div class="input-field">
-                    <input id="email" type="text" class="validate" name="email"  value="{{ old('email') }}" autofocus>
+                    <input id="email" type="text" class="validate" name="login"  value="{{ old('email') }}" autofocus>
                     <label for="email">Phone Number or Email</label>
 
                     @if ($errors->has('email'))
