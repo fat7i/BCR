@@ -14,7 +14,10 @@
                 </div>
             @endif
 
-            You are logged in!
+            <p>
+                <label>Phone: </label> {{ Auth()->user()->phone }}<br />
+                <label>Email: </label> {{ Auth()->user()->email }}<br />
+            </p>
         </div>
     </div>
 </div>

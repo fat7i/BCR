@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="{{ asset('t1/css/lightbox.min.css') }}">
     <link rel="stylesheet" href="{{ asset('t1/css/style.css') }}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f2f310153a68b98"></script>
 </head>
 <body>
     <!-- navbar -->
