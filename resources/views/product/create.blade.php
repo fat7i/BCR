@@ -30,6 +30,7 @@
         <div class="container">
             <div class="pages-title">
                 <h3>Add Product</h3>
+
             </div>
 
             <form method="POST" action="{{action('ProductController@store')}}">
@@ -37,7 +38,9 @@
                 <input type="hidden" class="validate" name="barcode" value="{{ $barcode }}">
                 <input type="hidden" class="validate" name="id" value="{{ old('id') }}" />
 
-
+                <div class="input-field">
+                    <h5><a><i class="fa fa-barcode"></i> {{ $barcode }}</a></h5>
+                </div>
                 <div class="input-field">
                     <input id="title" type="text" class="validate" name="title"  value="{{ old('title') }}" autofocus>
                     <label for="title">Product Name</label>

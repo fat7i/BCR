@@ -37,6 +37,7 @@
                     <li><a><i class="fa fa-user"></i> {{ $product->user->name }}</a></li>
                     <li><a><i class="star fullStar"></i> <b>{{ $product->rate }}</b></a></li>
                     <li><a><i class="fa fa-money"></i> QR {{ $product->price }}</a></li>
+                    <li><a><i class="fa fa-barcode"></i> {{ $product->barcode }}</a></li>
                 </ul>
             </div>
             <h5>{{ $product->title }}</h5>
