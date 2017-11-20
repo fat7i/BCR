@@ -55,4 +55,9 @@ class HomeController extends Controller
 
         return  back()->with('message', 'Thanks a lot, We\'ll contact you soon!');
     }
+
+    public function search()
+    {
+        echo "<h1>Search...</h1>"; //TODO search by name
+    }
 }

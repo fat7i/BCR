@@ -27,6 +27,8 @@
     <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f2f310153a68b98"></script>
 </head>
 <body>
+
+{{--
     <!-- navbar -->
     <div class="navbar">
         <div class="container">
@@ -43,7 +45,9 @@
         </div>
     </div>
     <!-- end navbar -->
+--}}
 
+{{--
     <!-- panel control -->
     <div class="panel-control-left">
         <ul id="slide-out-left" class="side-nav collapsible"  data-collapsible="accordion">
@@ -73,6 +77,8 @@
         </ul>
     </div>
     <!-- end panel control -->
+--}}
+
     @if (session('message'))
         <div class="offers app-section app-pages">
             <div class="container">
@@ -105,6 +111,32 @@
 
     @yield('content')
 
+@if (Request::header('User-Agent') != env('WEBVIEW_USER_AGENT'))
+    <footer>
+        <div class="row">
+            <div class="col s6">
+                <img width="100%" src="{{ url('/') }}/t1/img/get_appstore.png" >
+            </div>
+
+            <div class="col s6">
+                <img width="100%" src="{{ url('/') }}/t1/img/get_googleplay.png" >
+            </div>
+        </div>
+        <div class="container">
+            <h6>Find & follow us</h6>
+            <ul class="icon-social">
+                <li class="facebook"><a href=""><i class="fa fa-facebook"></i></a></li>
+                <li class="twitter"><a href=""><i class="fa fa-twitter"></i></a></li>
+                <li class="google"><a href=""><i class="fa fa-google"></i></a></li>
+                <li class="instagram"><a href=""><i class="fa fa-instagram"></i></a></li>
+            </ul>
+        </div>
+        <div class="ft-bottom">
+            <span>Made with <i class="fa fa-heart"></i>  for Qatar </span>
+        </div>
+    </footer>
+    <!-- end footer -->
+@endif
 
 <!-- Scripts -->
 <script src="{{ asset('t1/js/jquery.min.js') }}"></script>
@@ -113,11 +145,10 @@
 <script src="{{ asset('t1/js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('t1/js/custom.js') }}"></script>
 
-    {{--
-    <script src="{{ asset('t1/js/jquery.filterizr.min.js') }}"></script>
+{{--
+<script src="{{ asset('t1/js/jquery.filterizr.min.js') }}"></script>
 <script src="{{ asset('t1/js/lightbox.min.js') }}"></script>
 <script src="{{ asset('t1/js/custom-portfolio.js') }}"></script>
-
 --}}
 
     @yield('js')

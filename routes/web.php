@@ -13,8 +13,16 @@
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => '/'], function () {
+
+    Route::get('/', function () {
+        return view('welcome');
+    });
+
+    Route::get('home', 'HomeController@index')->name('home');
+    Route::get('contact', 'HomeController@contact')->name('contact');
+    Route::post('contact', 'HomeController@postContact');
+    Route::get('search', 'HomeController@search');
 });
 
 
@@ -31,16 +39,12 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('add/photo', 'ProductController@postPhoto');
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
-
 Route::group(['prefix' => 'shop'], function () {
     Route::get('add', 'LocationController@create')->name('add_shop');
     Route::post('add', 'LocationController@store');
     Route::get('{id}', 'LocationController@show');
 });
 
-Route::get('/contact', 'HomeController@contact')->name('contact');
-Route::post('/contact', 'HomeController@postContact');
 
 Route::group(['prefix' => 'category'], function () {
     Route::get('/', 'CategoryController@index');
