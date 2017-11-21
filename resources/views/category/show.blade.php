@@ -1,7 +1,7 @@
 @extends('layouts.t1')
 
 @section('content')
-    <div class="app-section app-pages">
+    <div class="app-section">
         <h2 class="container">{{ $category->title  }}</h2>
         <ul class="collection">
             @foreach($category->products as $p)

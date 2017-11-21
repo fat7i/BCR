@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Add Product -->
-    <div class="register app-section app-pages">
+    <div class="register app-section">
         <div class="container">
             <div class="pages-title">
                 <div class="chip left"><a href="{{ action('ProductController@show', ['id' => $product->barcode]) }}">< Back</a></div>

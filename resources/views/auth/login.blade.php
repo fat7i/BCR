@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <div class="login app-pages app-section">
+    <div class="login app-section">
         <div class="container">
             <div class="pages-title">
                 <h3>Login</h3>

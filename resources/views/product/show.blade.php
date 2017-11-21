@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- slider -->
-    <div class="slider-slick app-pages">
+    <div class="slider-slick">
         @foreach($product->photos as $p)
         <div class="slider-entry">
             <img src="{{ $p->path }}" alt="">

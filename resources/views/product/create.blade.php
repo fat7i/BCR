@@ -3,7 +3,7 @@
 @section('content')
 
     @if ($barcode)
-    <div class="offers app-section app-pages">
+    <div class="offers app-section">
         <div class="container">
             <div class="offers-content">
                 <div class="row">

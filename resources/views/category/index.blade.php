@@ -1,7 +1,7 @@
 @extends('layouts.t1')
 
 @section('content')
-    <div class="app-section app-pages">
+    <div class="app-section">
         <div>
             <h3 class="center-align">Categories List</h3>
         </div>
