@@ -119,14 +119,14 @@ class ProductController extends Controller
     {
         $product = Product::findByBarcode($id);
 
-
-
         if ($product) {
-            //-- save user activity
-            $userActivities = new UserActivities;
-            $userActivities->product_id = $product->id;
-            $userActivities->action = 'visit';
-            Auth::user()->activities()->save($userActivities);
+            if (Auth::user()) {
+                //-- save user activity
+                $userActivities = new UserActivities;
+                $userActivities->product_id = $product->id;
+                $userActivities->action = 'visit';
+                Auth::user()->activities()->save($userActivities);
+            }
 
             return view('product.show', ['product' => $product]);
         }else
