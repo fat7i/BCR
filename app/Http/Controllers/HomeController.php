@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -15,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['contact', 'postContact']]);
+        $this->middleware('auth', ['except' => ['contact', 'postContact', 'index']]);
     }
 
     /**
@@ -25,7 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        if ( Auth::user() ) {
+            return view('home', ['activities' => Auth::user()->activities]);
+        }else {
+            return view('misc.home_visitor');
+        }
     }
 
     public function contact()
@@ -60,4 +66,5 @@ class HomeController extends Controller
     {
         echo "<h1>Search...</h1>"; //TODO search by name
     }
+
 }

@@ -11,6 +11,7 @@ use App\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use App\UserActivities;
 
 class ProductController extends Controller
 {
@@ -90,6 +91,13 @@ class ProductController extends Controller
         $product->comments()->save($comment);
 
 
+        //-- save user activity
+        $userActivities = new UserActivities;
+        $userActivities->product_id = $product->id;
+        $userActivities->action = 'add';
+        Auth::user()->activities()->save($userActivities);
+
+
         return redirect()
             ->action('ProductController@show', ['id' => $product->barcode])
             ->with('toast', 'Thanks a lot for your contribution!');
@@ -111,9 +119,17 @@ class ProductController extends Controller
     {
         $product = Product::findByBarcode($id);
 
-        if ($product)
+
+
+        if ($product) {
+            //-- save user activity
+            $userActivities = new UserActivities;
+            $userActivities->product_id = $product->id;
+            $userActivities->action = 'visit';
+            Auth::user()->activities()->save($userActivities);
+
             return view('product.show', ['product' => $product]);
-        else
+        }else
             return redirect()->action('ProductController@create', ['id' => $id]);
     }
 
@@ -145,6 +161,12 @@ class ProductController extends Controller
         $product->price = $min_price;
         $product->save();
 
+        //-- save user activity
+        $userActivities = new UserActivities;
+        $userActivities->product_id = $product->id;
+        $userActivities->action = 'update';
+        Auth::user()->activities()->save($userActivities);
+
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
             ->with('toast', 'Thanks a lot for your contribution!');
     }
@@ -169,6 +191,12 @@ class ProductController extends Controller
         $product->rate = ceil( $product->comments()->avg('rate') );
 
         $product->save();
+
+        //-- save user activity
+        $userActivities = new UserActivities;
+        $userActivities->product_id = $product->id;
+        $userActivities->action = 'comment';
+        Auth::user()->activities()->save($userActivities);
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
             ->with('toast', 'Thanks a lot for your contribution!');
@@ -199,6 +227,12 @@ class ProductController extends Controller
             }
             $product->photos()->saveMany($photos);
         }
+
+        //-- save user activity
+        $userActivities = new UserActivities;
+        $userActivities->product_id = $product->id;
+        $userActivities->action = 'update';
+        Auth::user()->activities()->save($userActivities);
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
             ->with('toast', 'Thanks a lot for your contribution!');

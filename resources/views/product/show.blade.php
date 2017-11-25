@@ -1,5 +1,7 @@
 @extends('layouts.t1')
 
+@section('page_title'){{ $product->title }} - @endsection
+
 @section('content')
     <!-- slider -->
     <div class="slider-slick">

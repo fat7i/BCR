@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>@yield('page_title'){{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1 user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="HandheldFriendly" content="True">
@@ -45,9 +45,9 @@
         </div>
     </div>
     <!-- end navbar -->
---}}
 
-{{--
+
+
     <!-- panel control -->
     <div class="panel-control-left">
         <ul id="slide-out-left" class="side-nav collapsible"  data-collapsible="accordion">

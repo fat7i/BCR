@@ -26,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function activities ()
+    {
+        return $this->hasMany('App\UserActivities')->with('product')->orderBy('created_at','DESC');;
+    }
 }

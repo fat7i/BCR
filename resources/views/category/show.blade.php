@@ -1,5 +1,7 @@
 @extends('layouts.t1')
 
+@section('page_title'){{ $category->title  }} - @endsection
+
 @section('content')
     <div class="app-section">
         <h2 class="container">{{ $category->title  }}</h2>
