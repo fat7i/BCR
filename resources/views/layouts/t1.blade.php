@@ -28,7 +28,7 @@
 </head>
 <body>
 
-
+{{--
     <!-- navbar -->
     <div class="navbar">
         <div class="container">
@@ -77,6 +77,7 @@
         </ul>
     </div>
     <!-- end panel control -->
+    --}}
 
 
     @if (session('message'))
