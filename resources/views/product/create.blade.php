@@ -2,31 +2,8 @@
 
 @section('content')
 
-    @if ($barcode)
-    <div class="offers app-section">
-        <div class="container">
-            <div class="offers-content">
-                <div class="row">
-                    <div class="col s4">
-                        <div class="icon icon1">
-                            <i class="fa fa-support"></i>
-                        </div>
-                    </div>
-                    <div class="col s8">
-                        <div class="entry">
-                            <h5>Product not Found</h5>
-                            <p>Help the others by adding it and share your experiance </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    @endif
-
-
     <!-- Add Product -->
-    <div class="register app-section">
+    <div class="register app-section app-pages">
         <div class="container">
             <div class="pages-title">
                 <h3>Add Product</h3>
