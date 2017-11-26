@@ -18,7 +18,7 @@ class ProductController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth', ['except' => ['index', 'show', 'search']]);
+        $this->middleware('auth', ['except' => ['index', 'show', 'search', 'notFound']]);
     }
 
     public function create($barcode = null)
@@ -130,7 +130,7 @@ class ProductController extends Controller
 
             return view('product.show', ['product' => $product]);
         }else
-            return redirect()->action('ProductController@create', ['id' => $id]);
+            return redirect()->action('ProductController@notFound', ['id' => $id]);
     }
 
     public function report($id)
@@ -236,5 +236,10 @@ class ProductController extends Controller
 
         return  redirect()->action('ProductController@show', ['id' => $product->barcode])
             ->with('toast', 'Thanks a lot for your contribution!');
+    }
+
+    public function notFound ($id)
+    {
+        return view('product.not_found', ['barcode' => $id]);
     }
 }

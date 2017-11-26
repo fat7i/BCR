@@ -20,6 +20,7 @@ Route::group(['prefix' => '/'], function () {
     });
 
     Route::get('home', 'HomeController@index')->name('home');
+    Route::get('profile', 'HomeController@index');
     Route::get('contact', 'HomeController@contact')->name('contact');
     Route::post('contact', 'HomeController@postContact');
     Route::get('search', 'HomeController@search');
@@ -37,6 +38,7 @@ Route::group(['prefix' => 'product'], function () {
     Route::post('add/comment', 'ProductController@postComment');
     Route::get('{id}/add/photo', 'ProductController@addPhoto');
     Route::post('add/photo', 'ProductController@postPhoto');
+    Route::get('{id}/not_found', 'ProductController@notFound');
 });
 
 Route::group(['prefix' => 'shop'], function () {

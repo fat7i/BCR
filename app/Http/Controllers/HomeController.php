@@ -64,7 +64,7 @@ class HomeController extends Controller
 
     public function search()
     {
-        echo "<h1>Search...</h1>"; //TODO search by name
+        return view('misc.search'); //TODO search by name
     }
 
 }

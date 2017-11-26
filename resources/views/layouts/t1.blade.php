@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('page_title'){{ config('app.name', 'Laravel') }}</title>
+    <title>@if(@$page_title){{ $page_title }}@else{{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1  maximum-scale=1 user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="HandheldFriendly" content="True">
@@ -28,7 +28,7 @@
 </head>
 <body>
 
-{{--
+
     <!-- navbar -->
     <div class="navbar">
         <div class="container">
@@ -77,7 +77,7 @@
         </ul>
     </div>
     <!-- end panel control -->
---}}
+
 
     @if (session('message'))
         <div class="offers app-section">
